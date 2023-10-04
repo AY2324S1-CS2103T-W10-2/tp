@@ -9,7 +9,7 @@
         "project-team": "Project team",
         "lam-cheng-hou": "Lam Cheng Hou",
         "jane-doe": "Jane Doe",
-        "johnny-doe": "Johnny Doe",
+        "alyssa-ong": "Alyssa Ong",
         "jean-doe": "Jean Doe",
         "james-doe": "James Doe"
       },
@@ -130,8 +130,8 @@
       "headingKeywords": {}
     },
     {
-      "src": "team/johndoe.md",
-      "title": "John Doe's Project Portfolio Page",
+      "src": "team/alyssaong.md",
+      "title": "Alyssa Ong's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
