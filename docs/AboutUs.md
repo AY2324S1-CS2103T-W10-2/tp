@@ -13,7 +13,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Lam Cheng Hou
 
-<img src="images/lamchenghou.png" width="200px">
+<img src="images/profilepictures/lamchenghou.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/lamchenghou)]
@@ -25,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Yim Sohyun
 
-<img src="images/dlathyun.png" width="200px">
+<img src="images/profilepictures/dlathyun.png" width="200px">
 
 [[github](http://github.com/dlathyun)]
 [[portfolio](team/johndoe.md)]
@@ -35,29 +35,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Alyssa Ong 
 
-<img src="images/alyssaong.png" width="200px">
+<img src="images/profilepictures/alyssaongyx.png" width="200px">
 
-[[github](http://github.com/alyssaongyx)] [[portfolio](team/alyssaongyx.md)]
+[[github](http://github.com/alyssaongyx)]
+[[portfolio](team/alyssaongyx.md)]
 
 * Role: Developer
 * Responsibilities: UI, Code Quality
 
-### Jean Doe
+### Tan Jing Sheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/profilepictures/tjingsheng.jpg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/alyssaongyx.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/alyssaongyx.md)]
+[[github](http://github.com/tjingsheng)]
+[[portfolio](team/tjingsheng.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Storage, UI, Testing
+
