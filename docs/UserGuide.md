@@ -29,7 +29,7 @@ management and query features, SEPlendid can be your quick and versatile tool in
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar seplendid.jar`
    command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/MappingListUi.png)
+   ![Ui](images/mockups/MappingListUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
@@ -136,7 +136,7 @@ Format: `localcourse list`
 Example:
 |`localcourse list`|
 |--|
-|![localcourse-list-ui](images/LocalcourseListUi.png)
+|![localcourse-list-ui](images/mockups/LocalcourseListUi.png)
 
 ### Add a local course: `localcourse add`
 
@@ -147,7 +147,7 @@ Format: `localcourse add [localcode] [localname]`
 Example:
 |`localcourse add [CS1234] [Programming Fun]`|
 |--|
-|![localcourse-add-ui](images/LocalcourseAddUi.png)
+|![localcourse-add-ui](images/mockups/LocalcourseAddUi.png)
 
 ### Delete a local course: `localcourse delete`
 
@@ -158,7 +158,7 @@ Format: `localcourse delete [localcode]`
 Example:
 |`localcourse delete [CS1234]`|
 |--|
-|![localcourse-delete-ui](images/LocalcourseDeleteUi.png)
+|![localcourse-delete-ui](images/mockups/LocalcourseDeleteUi.png)
 
 ### List all partner courses: `partnercourse list`
 
@@ -169,7 +169,7 @@ Format: `partnercourse list`
 Example:
 |`partnercourse list`|
 |--|
-|![partnercourse-list-ui](images/PartnercourseListUi.png)
+|![partnercourse-list-ui](images/mockups/PartnercourseListUi.png)
 
 ### Add a partner course: `partnercourse add`
 
@@ -181,7 +181,7 @@ Format: `partnercourse add [university] [partnercode] [partnername]`
 Example:
 |`partnercourse add [University of Toronto] [ROB311] [Artificial Intelligence]`|
 |--|
-|![partnercourse-add-ui](images/PartnercourseAddUi.png)
+|![partnercourse-add-ui](images/mockups/PartnercourseAddUi.png)
 
 ### Delete a partner course: `partnercourse delete`
 
@@ -192,7 +192,7 @@ Format: `partnercourse delete [university] [partnercode]`
 Example:
 |`partnercourse delete [University of Toronto] [ROB311]`|
 |--|
-|![partnercourse-delete-ui](images/PartnercourseDeleteUi.png)
+|![partnercourse-delete-ui](images/mockups/PartnercourseDeleteUi.png)
 
 ### List all universities: `university list`
 
@@ -203,7 +203,7 @@ Format: `university list`
 Example:
 |`university list`|
 |--|
-|![university-list-ui](images/UniversityListUi.png)
+|![university-list-ui](images/mockups/UniversityListUi.png)
 
 ### List all mappings: `mapping list`
 
@@ -214,7 +214,7 @@ Format: `mapping list`
 Example:
 |`mapping list`|
 |--|
-|![mapping-list-ui](images/MappingListUi.png)
+|![mapping-list-ui](images/mockups/MappingListUi.png)
 
 ### Add a mapping: `mapping add`
 
@@ -226,7 +226,7 @@ Format: `mapping add [localcode] [university] [partnercode]`
 Example:
 |`mapping add [CS3230] [University of Toronto] [CSC373H1]`|
 |--|
-|![mapping-add-ui](images/MappingAddUi.png)
+|![mapping-add-ui](images/mockups/MappingAddUi.png)
 
 ### Delete a mapping : `mapping delete`
 
@@ -238,7 +238,7 @@ Format: `mapping delete [localcode] [university] [partnercode]`
 Example:
 |`mapping delete [CS3230] [University of Toronto] [CSC373H1]`|
 |--|
-|![mapping-delete-ui](images/MappingDeleteUi.png)
+|![mapping-delete-ui](images/mockups/MappingDeleteUi.png)
 
 ### Saving the data
 
