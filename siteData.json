@@ -176,6 +176,14 @@
       "headingKeywords": {}
     },
     {
+      "src": "team/tjingsheng.md",
+      "title": "John Doe's Project Portfolio Page",
+      "headings": {
+        "project-seplendid": "Project: SEPlendid"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "tutorials/AddRemark.md",
       "title": "Tutorial: Adding a command",
       "headings": {
