@@ -67,6 +67,11 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
