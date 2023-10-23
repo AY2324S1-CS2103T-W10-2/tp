@@ -61,6 +61,8 @@ public class ItemDetailPanel<SeplendidDataType> extends UiPart<Region> {
                 setGraphic(new PartnerCourseDetail((PartnerCourse) item).getRoot());
             } else if (item instanceof University) {
                 setGraphic(new UniversityDetail((University) item).getRoot());
+            } else if (item instanceof Mapping) {
+                setGraphic(new MappingDetail((Mapping) item).getRoot());
             }
         }
     }
