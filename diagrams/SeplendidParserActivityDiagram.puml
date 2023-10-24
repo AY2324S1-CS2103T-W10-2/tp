@@ -1,0 +1,21 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters command;
+:Command string is passed into\nSeplendidParser#parseCommand;
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+if () then ([command has arguments])
+    -commandWord, actionWord,\narguments extracted
+    -Pass userinput, actionWord and arguments\ninto respective getCommandWithArg\nmethods, based on commandWord
+
+else ([else])
+    -Command string is passed into\nSeplendidParser#\nparseNonArgumentCommand
+    -commandWord, actionWord\nextracted
+    -Pass userinput, actionWord\ninto respective getCommandWithoutArg\nmethods, based on commandWord
+endif
+-Command is returned to Logic and Command#execute is called
+stop
+@enduml

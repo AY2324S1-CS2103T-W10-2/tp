@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":SeplendidLogicManager" as SeplendidLogicManager LOGIC_COLOR
+participant ":SeplendidParser" as SeplendidParser LOGIC_COLOR
+participant "d:MappingDeleteCommand" as MappingDeleteCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box SeplendidModel MODEL_COLOR_T1
+participant ":SeplendidModel" as SeplendidModel MODEL_COLOR
+end box
+
+[-> SeplendidLogicManager : execute("mapping delete [CS2103] [\nNTU] [CZ2006]")
+activate SeplendidLogicManager
+
+SeplendidLogicManager -> SeplendidParser : parseCommand("mapping delete\n[CS2103] [NTU] [CZ2006]")
+activate SeplendidParser
+
+create MappingDeleteCommand
+SeplendidParser -> MappingDeleteCommand
+activate MappingDeleteCommand
+
+MappingDeleteCommand --> SeplendidParser : d
+deactivate MappingDeleteCommand
+
+SeplendidParser --> SeplendidLogicManager : d
+deactivate SeplendidParser
+
+SeplendidLogicManager -> MappingDeleteCommand : execute()
+activate MappingDeleteCommand
+
+MappingDeleteCommand -> SeplendidModel : getMappingIfExists(\nlocalCode, universityName, partnerCode)
+activate SeplendidModel
+
+SeplendidModel --> MappingDeleteCommand : Optional.of(mapping)
+deactivate SeplendidModel
+
+MappingDeleteCommand -> SeplendidModel : deleteMapping(mapping)
+activate SeplendidModel
+
+SeplendidModel --> MappingDeleteCommand
+deactivate SeplendidModel
+
+create CommandResult
+MappingDeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> MappingDeleteCommand
+deactivate CommandResult
+
+MappingDeleteCommand --> SeplendidLogicManager : r
+deactivate MappingDeleteCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+MappingDeleteCommand -[hidden]-> SeplendidLogicManager
+destroy MappingDeleteCommand
+
+[<--SeplendidLogicManager
+deactivate SeplendidLogicManager
+@enduml
