@@ -40,7 +40,7 @@
       "src": "DeveloperGuide.md",
       "title": "Developer Guide",
       "headings": {
-        "ab-3-developer-guide": "AB-3 Developer Guide",
+        "seplendid-developer-guide": "SEPlendid Developer Guide",
         "acknowledgements": "Acknowledgements",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
@@ -53,6 +53,7 @@
         "implementation": "Implementation",
         "parser-to-handle-both-commands-with-and-without-arguments": "Parser to handle both commands with and without arguments",
         "mapping-feature": "Mapping feature",
+        "sorting-feature": "Sorting feature",
         "university-feature": "University Feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
