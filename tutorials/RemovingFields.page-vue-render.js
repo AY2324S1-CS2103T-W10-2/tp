@@ -83,7 +83,7 @@ with(this){return _c('pre',[_c('code',{pre:true,attrs:{"class":"hljs java"}},[_c
 with(this){return _c('p',[_c('strong',[_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("PersonCard.fxml")])])])}
 },function anonymous(
 ) {
-with(this){return _c('pre',[_c('code',{pre:true,attrs:{"class":"hljs"}},[_c('span',[_v("...\n")]),_c('span',[_v("<Label fx:id=\"phone\" styleClass=\"item_small_label\" text=\"\\$phone\" />\n")]),_c('span',[_v("<Label fx:id=\"address\" styleClass=\"item_small_label\" text=\"\\$address\" />\n")]),_c('span',[_v("<Label fx:id=\"email\" styleClass=\"item_small_label\" text=\"\\$email\" />\n")]),_c('span',[_v("...\n")])])])}
+with(this){return _c('pre',[_c('code',{pre:true,attrs:{"class":"hljs"}},[_c('span',[_v("...\n")]),_c('span',[_v("<Label fx:id=\"phone\" styleClass=\"text-font-size\" text=\"\\$phone\" />\n")]),_c('span',[_v("<Label fx:id=\"address\" styleClass=\"text-font-size\" text=\"\\$address\" />\n")]),_c('span',[_v("<Label fx:id=\"email\" styleClass=\"text-font-size\" text=\"\\$email\" />\n")]),_c('span',[_v("...\n")])])])}
 },function anonymous(
 ) {
 with(this){return _c('p',[_v("After removing the "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("Label")]),_v(", we can proceed to formally test our code. If everything went well, you should have most of your tests pass. Fix any remaining errors until the tests all pass.")])}
@@ -107,6 +107,6 @@ with(this){return _c('pre',[_c('code',{pre:true,attrs:{"class":"hljs json"}},[_c
 with(this){return _c('p',[_v("You can go through each individual "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("json")]),_v(" file and manually remove the "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("address")]),_v(" field.")])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Fri, 27 Oct 2023, 17:03:17 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Sat, 28 Oct 2023, 14:25:30 GMT+8]")])])])}
 }];
   
