@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private ItemListPanel<SeplendidDataType> itemListPanel;
     private ItemDetailPanel<SeplendidDataType> itemDetailPanel;
+    private HelpWindow helpWindow;
 
     private ResultBox resultBox;
 
@@ -60,12 +61,16 @@ public class MainWindow extends UiPart<Stage> {
         this.seplendidLogic = seplendidLogic;
 
         // Configure the UI
+        UiManager.setDefaultFont(primaryStage.getScene().getRoot(), UiManager.getDefaultFont());
         setWindowDefaultSize(seplendidLogic.getGuiSettings());
+
+        this.helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+
     /**
      * Fills up all the placeholders of this window.
      */
@@ -114,6 +119,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleHelp() {
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
+    }
+
+
     public ItemListPanel<? extends SeplendidDataType> getItemListPanel() {
         return itemListPanel;
     }
@@ -156,6 +174,10 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             default:
                 // do nothing
+            }
+
+            if (commandResult.isShowHelp()) {
+                handleHelp();
             }
 
             if (commandResult.isExit()) {

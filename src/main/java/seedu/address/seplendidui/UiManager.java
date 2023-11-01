@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
@@ -20,6 +21,7 @@ import seedu.address.logic.SeplendidLogic;
  */
 public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
+    private static Font defaultFont;
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
     private static final String SONO_FONT_TTF = "/font/Sono-Light.ttf";
@@ -37,6 +39,7 @@ public class UiManager implements Ui {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
+        defaultFont = loadDefaultFont();
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
@@ -45,13 +48,25 @@ public class UiManager implements Ui {
             mainWindow = new MainWindow(primaryStage, seplendidLogic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-            Font font = Font.loadFont(getClass().getResourceAsStream(SONO_FONT_TTF), 12);
-            setDefaultFont(mainWindow.getPrimaryStage().getScene().getRoot(), font);
-
+            setDefaultFont(primaryStage.getScene().getRoot(), defaultFont);
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
         }
+    }
+    /**
+     * Loads the default font.
+     *
+     * @return The loaded Font, or null if there is an error loading the font.
+     */
+    private Font loadDefaultFont() {
+        try {
+            return Font.loadFont(getClass().getResourceAsStream(SONO_FONT_TTF), 12);
+        } catch (Throwable e) {
+            logger.severe(StringUtil.getDetails(e));
+            showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+        }
+        return null;
     }
 
     /**
@@ -60,7 +75,7 @@ public class UiManager implements Ui {
      * @param node The JavaFX node for which to set the default font.
      * @param font The font to be set.
      */
-    private void setDefaultFont(Node node, Font font) {
+    public static void setDefaultFont(Node node, Font font) {
         node.setStyle(String.format("-fx-font-family: '%s';", font.getFamily()));
         if (node instanceof Parent) {
             for (Node child : ((Parent) node).getChildrenUnmodifiable()) {
@@ -68,6 +83,16 @@ public class UiManager implements Ui {
             }
         }
     }
+
+    /**
+     * Gets the default font.
+     *
+     * @return The default Font of the application.
+     */
+    public static Font getDefaultFont() {
+        return defaultFont;
+    }
+
 
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
