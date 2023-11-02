@@ -26,9 +26,9 @@ with(this){return _c('h1',{attrs:{"id":"3-a-short-tutorial"}},[_v("3. A Short Tu
 with(this){return _c('h2',{attrs:{"id":"3-1-graphical-user-interface-gui"}},[_v("3.1 Graphical User Interface (GUI)"),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#3-1-graphical-user-interface-gui","onclick":"event.stopPropagation()"}})])}
 },function anonymous(
 ) {
-with(this){return _c('ol',[_c('li',[_v("User Input Box")]),_v(" "),_c('li',[_v("User Output Box")]),_v(" "),_c('li',[_v("List of courses, universities or notes")]),_v(" "),_c('li',[_v("Display pane for each item")])])}
+with(this){return _c('ol',[_c('li',[_v("Command Input Box")]),_v(" "),_c('li',[_v("Command Result Box")]),_v(" "),_c('li',[_v("List Panel for Local Courses, Partner Courses, Universities, Mappings or Notes")]),_v(" "),_c('li',[_v("Display Panel for details of the selected item from the list panel.")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Thu, 2 Nov 2023, 23:16:26 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Thu, 2 Nov 2023, 23:45:56 GMT+8]")])])])}
 }];
   
