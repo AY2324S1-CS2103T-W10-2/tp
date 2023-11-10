@@ -18,27 +18,31 @@
 }
 
 .centered-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .resized-image {
-  width: 500px;
-  height: auto; /* Maintain aspect ratio */
+    width: 700px;
+    height: auto; /* Maintain aspect ratio */
 }
 
 .centered-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  font-style: italic;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-style: italic;
 }
 
 .toc ul {
-  list-style-type: none;
+    list-style-type: none;
+}
+
+.image-caption {
+    max-width: 70%;
 }
 
 
