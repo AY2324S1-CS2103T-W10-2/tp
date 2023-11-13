@@ -38,7 +38,6 @@
     },
     {
       "src": "DeveloperGuide.md",
-      "title": "Developer Guide",
       "headings": {
         "seplendid-developer-guide": "SEPlendid Developer Guide",
         "acknowledgements": "Acknowledgements",
@@ -46,7 +45,7 @@
         "design": "Design",
         "architecture": "Architecture",
         "ui-component": "UI component",
-        "seplendidlogic-component": "SeplendidLogic component",
+        "logic-component": "Logic component",
         "model-component": "Model component",
         "storage-component": "Storage component",
         "common-classes": "Common classes",
@@ -66,8 +65,11 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "adding-and-delete-a-mapping": "Adding and delete a mapping",
-        "saving-data": "Saving data"
+        "local-course-2": "Local Course",
+        "partner-course-2": "Partner Course",
+        "university": "University",
+        "mapping-2": "Mapping",
+        "note-2": "Note"
       },
       "headingKeywords": {}
     },
