@@ -9,30 +9,30 @@ Class XYZCommand
 
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
-Class AddressBookParser
+Class SeplendidParser
 Class XYZCommandParser
 Class CliSyntax
 Class ParserUtil
-Class ArgumentMultimap
-Class ArgumentTokenizer
+Class SeplendidArgumentMap
+Class SeplendidArgumentTokenizer
 Class Prefix
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> AddressBookParser
+HiddenOutside ..> SeplendidParser
 
-AddressBookParser .down.> XYZCommandParser: creates >
+SeplendidParser .down.> XYZCommandParser: creates >
 
 XYZCommandParser ..> XYZCommand : creates >
-AddressBookParser ..> Command : returns >
+SeplendidParser ..> Command : returns >
 XYZCommandParser .up.|> Parser
-XYZCommandParser ..> ArgumentMultimap
-XYZCommandParser ..> ArgumentTokenizer
-ArgumentTokenizer .left.> ArgumentMultimap
+XYZCommandParser ..> SeplendidArgumentMap
+XYZCommandParser ..> SeplendidArgumentTokenizer
+SeplendidArgumentTokenizer .left.> SeplendidArgumentMap
 XYZCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
 XYZCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
-ArgumentTokenizer .down.> Prefix
+SeplendidArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
 @enduml

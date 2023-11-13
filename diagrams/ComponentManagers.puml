@@ -4,14 +4,14 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
-package Logic as LogicPackage {
-Class "<<interface>>\nLogic" as Logic
-Class LogicManager
+package SeplendidLogic as SeplendidLogicPackage {
+Class "<<interface>>\nSeplendidLogic" as SeplendidLogic
+Class SeplendidLogicManager
 }
 
-package Model as ModelPackage {
-Class "<<interface>>\nModel" as Model
-Class ModelManager
+package SeplendidModel as SeplendidModelPackage {
+Class "<<interface>>\nSeplendidModel" as SeplendidModel
+Class SeplendidModelManager
 }
 
 package Storage as StoragePackage {
@@ -20,12 +20,12 @@ Class StorageManager
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Logic
+HiddenOutside ..> SeplendidLogic
 
-LogicManager .up.|> Logic
-ModelManager .up.|> Model
+SeplendidLogicManager .up.|> SeplendidLogic
+SeplendidModelManager .up.|> SeplendidModel
 StorageManager .up.|> Storage
 
-LogicManager --> Model
-LogicManager --> Storage
+SeplendidLogicManager --> SeplendidModel
+SeplendidLogicManager --> Storage
 @enduml

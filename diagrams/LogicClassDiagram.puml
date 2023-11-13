@@ -4,19 +4,19 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
-package Logic as LogicPackage {
+package SeplendidLogic as SeplendidLogicPackage {
 
-Class AddressBookParser
+Class SeplendidParser
 Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
 
 
-Class "<<interface>>\nLogic" as Logic
-Class LogicManager
+Class "<<interface>>\nSeplendidLogic" as SeplendidLogic
+Class SeplendidLogicManager
 }
 
-package Model {
+package SeplendidModel {
 Class HiddenModel #FFFFFF
 }
 
@@ -24,23 +24,23 @@ package Storage {
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Logic
+HiddenOutside ..> SeplendidLogic
 
-LogicManager .right.|> Logic
-LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+SeplendidLogicManager .right.|> SeplendidLogic
+SeplendidLogicManager -right->"1" SeplendidParser
+SeplendidParser ..> XYZCommand : creates >
 
 XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+SeplendidLogicManager .left.> Command : executes >
 
-LogicManager --> Model
-LogicManager --> Storage
-Storage --[hidden] Model
+SeplendidLogicManager --> SeplendidModel
+SeplendidLogicManager --> Storage
+Storage --[hidden] SeplendidModel
 Command .[hidden]up.> Storage
-Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+Command .right.> SeplendidModel
+note right of XYZCommand: XYZCommand = NoteAddCommand, \nLocalCourseAddCommand, etc
 
-Logic ..> CommandResult
-LogicManager .down.> CommandResult
+SeplendidLogic ..> CommandResult
+SeplendidLogicManager .down.> CommandResult
 Command .up.> CommandResult : produces >
 @enduml

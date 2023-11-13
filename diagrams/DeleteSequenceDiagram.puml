@@ -2,69 +2,69 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+box SeplendidLogic LOGIC_COLOR_T1
+participant ":SeplendidLogicManager" as SeplendidLogicManager LOGIC_COLOR
+participant ":SeplendidParser" as SeplendidParser LOGIC_COLOR
+participant ":NoteDeleteCommandParser" as NoteDeleteCommandParser LOGIC_COLOR
+participant "d:NoteDeleteCommand" as NoteDeleteCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+box SeplendidModel MODEL_COLOR_T1
+participant ":SeplendidModel" as SeplendidModel MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
-activate LogicManager
+[-> SeplendidLogicManager : execute("note delete [1]")
+activate SeplendidLogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+SeplendidLogicManager -> SeplendidParser : parseCommand("note delete [1]")
+activate SeplendidParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create NoteDeleteCommandParser
+SeplendidParser -> NoteDeleteCommandParser
+activate NoteDeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+NoteDeleteCommandParser --> SeplendidParser
+deactivate NoteDeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
-activate DeleteCommandParser
+SeplendidParser -> NoteDeleteCommandParser : parse("[1]")
+activate NoteDeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create NoteDeleteCommand
+NoteDeleteCommandParser -> NoteDeleteCommand
+activate NoteDeleteCommand
 
-DeleteCommand --> DeleteCommandParser : d
-deactivate DeleteCommand
+NoteDeleteCommand --> NoteDeleteCommandParser : d
+deactivate NoteDeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
+NoteDeleteCommandParser --> SeplendidParser : d
+deactivate NoteDeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+NoteDeleteCommandParser -[hidden]-> SeplendidParser
+destroy NoteDeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+SeplendidParser --> SeplendidLogicManager : d
+deactivate SeplendidParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+SeplendidLogicManager -> NoteDeleteCommand : execute()
+activate NoteDeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
-activate Model
+NoteDeleteCommand -> SeplendidModel : deleteNote(1)
+activate SeplendidModel
 
-Model --> DeleteCommand
-deactivate Model
+SeplendidModel --> NoteDeleteCommand
+deactivate SeplendidModel
 
 create CommandResult
-DeleteCommand -> CommandResult
+NoteDeleteCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> NoteDeleteCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : result
-deactivate DeleteCommand
+NoteDeleteCommand --> SeplendidLogicManager : result
+deactivate NoteDeleteCommand
 
-[<--LogicManager
-deactivate LogicManager
+[<--SeplendidLogicManager
+deactivate SeplendidLogicManager
 @enduml
