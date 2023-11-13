@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box SeplendidLogic LOGIC_COLOR_T1
+participant ":SeplendidLogicManager" as SeplendidLogicManager LOGIC_COLOR
+participant ":SeplendidParser" as SeplendidParser LOGIC_COLOR
+participant ":LocalCourseSortCommandParser" as LocalCourseSortCommandParser LOGIC_COLOR
+participant ":LocalCourseComparatorByLocalCode" as LocalCourseComparatorByLocalCode LOGIC_COLOR
+participant "d:LocalCourseSortCommand" as LocalCourseSortCommand LOGIC_COLOR
+participant ":LocalCourse" as LocalCourse LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box SeplendidModel MODEL_COLOR_T1
+participant ":SeplendidModel" as SeplendidModel MODEL_COLOR
+end box
+
+[-> SeplendidLogicManager : execute("localcourse sort [localcode]")
+activate SeplendidLogicManager
+
+SeplendidLogicManager -> SeplendidParser : parseCommand("localcourse sort [localcode]")
+activate SeplendidParser
+
+create LocalCourseSortCommandParser
+SeplendidParser -> LocalCourseSortCommandParser
+activate LocalCourseSortCommandParser
+
+LocalCourseSortCommandParser --> SeplendidParser
+deactivate LocalCourseSortCommandParser
+
+SeplendidParser -> LocalCourseSortCommandParser : parse("[localcode]")
+activate LocalCourseSortCommandParser
+
+create LocalCourseComparatorByLocalCode
+LocalCourseSortCommandParser -> LocalCourseComparatorByLocalCode
+activate LocalCourseComparatorByLocalCode
+
+LocalCourseComparatorByLocalCode --> LocalCourseSortCommandParser : d
+deactivate LocalCourseComparatorByLocalCode
+
+create LocalCourseSortCommand
+LocalCourseSortCommandParser -> LocalCourseSortCommand
+activate LocalCourseSortCommand
+
+LocalCourseSortCommand --> LocalCourseSortCommandParser : d
+deactivate LocalCourseSortCommand
+
+LocalCourseSortCommandParser --> SeplendidParser : d
+deactivate LocalCourseSortCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LocalCourseSortCommandParser -[hidden]-> SeplendidParser
+destroy LocalCourseSortCommandParser
+
+SeplendidParser --> SeplendidLogicManager : d
+deactivate SeplendidParser
+
+SeplendidLogicManager -> LocalCourseSortCommand : execute()
+activate LocalCourseSortCommand
+
+LocalCourseSortCommand -> SeplendidModel : updateSortedLocalList(localCourseComparator)
+activate SeplendidModel
+
+SeplendidModel --> LocalCourseSortCommand
+deactivate SeplendidModel
+
+create CommandResult
+LocalCourseSortCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LocalCourseSortCommand
+deactivate CommandResult
+
+LocalCourseSortCommand --> SeplendidLogicManager : result
+deactivate LocalCourseSortCommand
+
+[<--SeplendidLogicManager
+deactivate SeplendidLogicManager
+@enduml

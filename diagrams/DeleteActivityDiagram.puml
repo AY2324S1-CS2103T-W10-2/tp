@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters delete command;
+
+if () then ([specified data object exists in mapping])
+    -Error: Cannot delete data object that exists in mapping
+    stop
+else ([else])
+        if () then ([specified data object exists in SEPlendid])
+                -delete command successfully executes.\nData object is deleted.
+                stop
+        else ([else])
+            -Error: The specified data object does not exist in SEPlendid
+stop
+@enduml

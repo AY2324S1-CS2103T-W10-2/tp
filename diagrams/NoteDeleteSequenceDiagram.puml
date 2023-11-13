@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box SeplendidLogic LOGIC_COLOR_T1
+participant ":SeplendidLogicManager" as SeplendidLogicManager LOGIC_COLOR
+participant ":SeplendidParser" as SeplendidParser LOGIC_COLOR
+participant ":NoteDeleteCommandParser" as NoteDeleteCommandParser LOGIC_COLOR
+participant "d:NoteDeleteCommand" as NoteDeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box SeplendidModel MODEL_COLOR_T1
+participant ":SeplendidModel" as SeplendidModel MODEL_COLOR
+end box
+
+[-> SeplendidLogicManager : execute("note delete [1]")
+activate SeplendidLogicManager
+
+SeplendidLogicManager -> SeplendidParser : parseCommand("note delete [1]")
+activate SeplendidParser
+
+create NoteDeleteCommandParser
+SeplendidParser -> NoteDeleteCommandParser
+activate NoteDeleteCommandParser
+
+NoteDeleteCommandParser --> SeplendidParser
+deactivate NoteDeleteCommandParser
+
+SeplendidParser -> NoteDeleteCommandParser : parse("[1]")
+activate NoteDeleteCommandParser
+
+create NoteDeleteCommand
+NoteDeleteCommandParser -> NoteDeleteCommand
+activate NoteDeleteCommand
+
+NoteDeleteCommand --> NoteDeleteCommandParser : d
+deactivate NoteDeleteCommand
+
+NoteDeleteCommandParser --> SeplendidParser : d
+deactivate NoteDeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+NoteDeleteCommandParser -[hidden]-> SeplendidParser
+destroy NoteDeleteCommandParser
+
+SeplendidParser --> SeplendidLogicManager : d
+deactivate SeplendidParser
+
+SeplendidLogicManager -> NoteDeleteCommand : execute()
+activate NoteDeleteCommand
+
+NoteDeleteCommand -> SeplendidModel : deleteNote(1)
+activate SeplendidModel
+
+SeplendidModel --> NoteDeleteCommand
+deactivate SeplendidModel
+
+create CommandResult
+NoteDeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> NoteDeleteCommand
+deactivate CommandResult
+
+NoteDeleteCommand --> SeplendidLogicManager : result
+deactivate NoteDeleteCommand
+
+[<--SeplendidLogicManager
+deactivate SeplendidLogicManager
+@enduml
