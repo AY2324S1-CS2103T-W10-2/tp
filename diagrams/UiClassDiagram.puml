@@ -8,13 +8,22 @@ package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
-Class MainWindow
 Class HelpWindow
-Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
+Class MainWindow
 Class CommandBox
+Class ResultDisplay
+Class ItemListPanel
+Class LocalCourseItem
+Class PartnerCourseItem
+Class MappingItem
+Class UniversityItem
+Class NoteItem
+Class ItemDetailPanel
+Class LocalCourseDetail
+Class PartnerCourseDetail
+Class MappingDetail
+Class UniversityDetail
+Class NoteDetail
 }
 
 package Model <<Rectangle>> {
@@ -30,31 +39,60 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
+
+MainWindow *-down-> "1" ItemListPanel
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
+MainWindow -down-|> UiPart
 MainWindow --> "0..1" HelpWindow
+MainWindow *-down-> "1" ItemDetailPanel
 
-PersonListPanel -down-> "*" PersonCard
 
-MainWindow -left-|> UiPart
+ItemListPanel -down-> "*" LocalCourseItem
+ItemListPanel -down-> "*" PartnerCourseItem
+ItemListPanel -down-> "*" MappingItem
+ItemListPanel -down-> "*" UniversityItem
+ItemListPanel -down-> "*" NoteItem
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ItemDetailPanel -down-> "*" LocalCourseDetail
+ItemDetailPanel -down-> "*" PartnerCourseDetail
+ItemDetailPanel -down-> "*" MappingDetail
+ItemDetailPanel -down-> "*" UniversityDetail
+ItemDetailPanel -down-> "*" NoteDetail
 
-PersonCard ..> Model
+LocalCourseItem ..> Model
+PartnerCourseItem ..> Model
+MappingItem ..> Model
+UniversityItem ..> Model
+NoteItem ..> Model
+LocalCourseDetail ..> Model
+PartnerCourseDetail ..> Model
+MappingDetail ..> Model
+UniversityDetail ..> Model
+NoteDetail ..> Model
+
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+ItemListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
 
 MainWindow -[hidden]-|> UiPart
+HelpWindow --|> UiPart
+ResultDisplay --|> UiPart
+CommandBox --|> UiPart
+ItemListPanel --|> UiPart
+ItemDetailPanel --|> UiPart
+LocalCourseItem --|> UiPart
+PartnerCourseItem --|> UiPart
+MappingItem --|> UiPart
+UniversityItem --|> UiPart
+NoteItem --|> UiPart
+LocalCourseDetail --|> UiPart
+PartnerCourseDetail --|> UiPart
+MappingDetail --|> UiPart
+UniversityDetail --|> UiPart
+NoteDetail --|> UiPart
+
 @enduml
