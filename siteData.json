@@ -78,7 +78,10 @@
         "partner-course-2": "Partner Course",
         "university": "University",
         "mapping-2": "Mapping",
-        "note-2": "Note"
+        "note-2": "Note",
+        "saving-data": "Saving data",
+        "effort-2": "Effort",
+        "morphing-of-ab3-to-seplendid-2": "Morphing of AB3 to SEPlendid"
       },
       "headingKeywords": {}
     },
@@ -125,6 +128,9 @@
         "seplendid-user-guide": "SEPlendid User Guide",
         "about-seplendid": "About SEPlendid",
         "table-of-contents": "Table of Contents",
+        "5-1-5-search-a-local-course-by-attributes-localcourse-search": "5.1.5 Search a local course by attributes: localcourse search",
+        "5-2-5-search-a-partner-course-by-attributes-partnercourse-search": "5.2.5 Search a partner course by attributes: partnercourse search",
+        "5-3-2-search-a-university-by-attributes-university-search": "5.3.2 Search a university by attributes: university search",
         "1-how-to-navigate-this-user-guide": "1. How to navigate this User Guide?",
         "2-icons-used-in-this-user-guide": "2. Icons used in this User Guide",
         "3-installation": "3. Installation",

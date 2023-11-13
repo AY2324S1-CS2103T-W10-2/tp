@@ -14,30 +14,67 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+package "Storage" #F4F6F6{
+Class "<<interface>>\nLocalCourseCatalogueStorage" as LocalCourseCatalogueStorage
+Class "<<interface>>\nPartnerCourseCatalogueStorage" as PartnerCourseCatalogueStorage
+Class "<<interface>>\nUniversityCatalogueStorage" as UniversityCatalogueStorage
+Class "<<interface>>\nMappingCatalogueStorage" as MappingCatalogueStorage
+Class "<<interface>>\nNoteCatalogueStorage" as NoteCatalogueStorage
+
+Class JsonLocalCourseCatalogueStorage
+Class JsonSerializableLocalCourseCatalogue
+Class JsonPartnerCourseCatalogueStorage
+Class JsonSerializablePartnerCourseCatalogue
+Class JsonUniversityCatalogueStorage
+Class JsonSerializableUniversityCatalogue
+Class JsonMappingCatalogueStorage
+Class JsonSerializableMappingCatalogue
+Class JsonNoteCatalogueStorage
+Class JsonSerializableNoteCatalogue
+
 Class JsonAdaptedTag
-}
-
-}
-
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Storage
+Class JsonAdaptedLocalCourse
+Class JsonAdaptedPartnerCourse
+Class JsonAdaptedMapping
+Class JsonAdaptedUniversity
+Class JsonAdaptedNote
 
 StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -down-> "1" UserPrefsStorage
+StorageManager -up-> "1" LocalCourseCatalogueStorage
+StorageManager -up-> "1" PartnerCourseCatalogueStorage
+StorageManager -down-> "1" MappingCatalogueStorage
+StorageManager -up-> "1" UniversityCatalogueStorage
+StorageManager -up-> "1" NoteCatalogueStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -left-|> LocalCourseCatalogueStorage
+Storage -left-|> PartnerCourseCatalogueStorage
+Storage -left-|> UniversityCatalogueStorage
+Storage -down-|> MappingCatalogueStorage
+Storage -right-|> NoteCatalogueStorage
+Storage -right-|> UserPrefsStorage
+
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
 
+JsonLocalCourseCatalogueStorage .up.|> LocalCourseCatalogueStorage
+JsonLocalCourseCatalogueStorage ..> JsonSerializableLocalCourseCatalogue
+JsonSerializableLocalCourseCatalogue --> "*" JsonAdaptedLocalCourse
+
+JsonPartnerCourseCatalogueStorage .up.|> PartnerCourseCatalogueStorage
+JsonPartnerCourseCatalogueStorage ..> JsonSerializablePartnerCourseCatalogue
+JsonSerializablePartnerCourseCatalogue --> "*" JsonAdaptedPartnerCourse
+
+JsonUniversityCatalogueStorage .up.|> UniversityCatalogueStorage
+JsonUniversityCatalogueStorage ..> JsonSerializableUniversityCatalogue
+JsonSerializableUniversityCatalogue --> "*" JsonAdaptedUniversity
+
+JsonMappingCatalogueStorage .up.|> MappingCatalogueStorage
+JsonMappingCatalogueStorage ..> JsonSerializableMappingCatalogue
+JsonSerializableMappingCatalogue --> "*" JsonAdaptedMapping
+
+JsonNoteCatalogueStorage .up.|> NoteCatalogueStorage
+JsonNoteCatalogueStorage ..> JsonSerializableNoteCatalogue
+JsonSerializableNoteCatalogue --> "*" JsonAdaptedNote
+JsonAdaptedNote --> "*" JsonAdaptedTag
 @enduml

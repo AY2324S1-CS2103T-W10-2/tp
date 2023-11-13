@@ -4,51 +4,110 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+
+Package SeplendidModel as ModelPackage <<Rectangle>>{
+Class "<<interface>>\nReadOnlyLocalCourseCatalogue" as ReadOnlyLocalCourseCatalogue
+Class "<<interface>>\nReadOnlyPartnerCourseCatalogue" as ReadOnlyPartnerCourseCatalogue
+Class "<<interface>>\nReadOnlyUniversityCatalogue" as ReadOnlyUniversityCatalogue
+Class "<<interface>>\nReadOnlyMappingCatalogue" as ReadOnlyMappingCatalogue
+Class "<<interface>>\nReadOnlyNoteCatalogue" as ReadOnlyNoteCatalogue
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
-
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-
-Class I #FFFFFF
-}
+Class "<<interface>>\nSeplendidModel" as SeplendidModel
+Class LocalCourseCatalogue
+Class PartnerCourseCatalogue
+Class UniversityCatalogue
+Class NoteCatalogue
+Class MappingCatalogue
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
+HiddenOutside ..> SeplendidModel
 
-AddressBook .up.|> ReadOnlyAddressBook
+Class SeplendidModelManager
+Class UserPrefs
 
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
-ModelManager -right-> "1" UserPrefs
+Class UniqueLocalCourseList
+Class UniquePartnerCourseList
+Class UniqueNoteList
+Class UniqueMappingList
+Class UniqueUniversityList
+
+Class LocalCourse
+Class LocalCode
+Class LocalName
+Class LocalUnit
+Class LocalDescription
+
+Class PartnerCourse
+Class PartnerCode
+Class PartnerName
+Class PartnerUnit
+Class PartnerDescription
+
+Class University
+Class UniversityName
+
+Class Mapping
+Class MappingMiscInformation
+
+Class Note
+Class Content
+Class Tag
+
+LocalCourseCatalogue .up.|> ReadOnlyLocalCourseCatalogue
+PartnerCourseCatalogue .up.|> ReadOnlyPartnerCourseCatalogue
+UniversityCatalogue .up.|> ReadOnlyUniversityCatalogue
+NoteCatalogue .up.|> ReadOnlyNoteCatalogue
+MappingCatalogue .up.|> ReadOnlyMappingCatalogue
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+SeplendidModelManager .up.|> SeplendidModel
+SeplendidModel .left.> ReadOnlyLocalCourseCatalogue
+SeplendidModel .left.> ReadOnlyPartnerCourseCatalogue
+SeplendidModel .left.> ReadOnlyMappingCatalogue
+SeplendidModel .right.> ReadOnlyUserPrefs
+SeplendidModel .right.> ReadOnlyUniversityCatalogue
+SeplendidModel .right.> ReadOnlyNoteCatalogue
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+SeplendidModelManager -left-> "1" LocalCourseCatalogue
+SeplendidModelManager -left-> "1" PartnerCourseCatalogue
+SeplendidModelManager -left-> "1" UniversityCatalogue
+SeplendidModelManager -right-> "1" MappingCatalogue
+SeplendidModelManager -right-> "1" NoteCatalogue
+SeplendidModelManager -right-> "1" UserPrefs
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+LocalCourseCatalogue *--> "1" UniqueLocalCourseList
+UniqueLocalCourseList --> "~* all" LocalCourse
+PartnerCourseCatalogue *--> "1" UniquePartnerCourseList
+UniquePartnerCourseList --> "~* all" PartnerCourse
+UniversityCatalogue *--> "1" UniqueUniversityList
+UniqueUniversityList --> "~* all" University
+MappingCatalogue *--> "1" UniqueMappingList
+UniqueMappingList --> "~* all" Mapping
+NoteCatalogue *--> "1" UniqueNoteList
+UniqueNoteList --> "~* all" Note
 
-ModelManager --> "~* filtered" Person
+LocalCourse *--> LocalCode
+LocalCourse *--> LocalName
+LocalCourse *--> LocalUnit
+LocalCourse *--> LocalDescription
+
+PartnerCourse *--> PartnerCode
+PartnerCourse *--> PartnerName
+PartnerCourse *--> PartnerUnit
+PartnerCourse *--> PartnerDescription
+
+University *--> UniversityName
+
+Mapping *--> MappingMiscInformation
+Mapping ---> LocalCode
+Mapping ---> PartnerCode
+Mapping ---> UniversityName
+
+Note *--> Content
+Note *--> "*" Tag
+
+SeplendidModelManager -[#blue]-> "~* filtered/\nsorted" LocalCourse
+SeplendidModelManager -[#blue]-> "~* filtered/\nsorted" PartnerCourse
+SeplendidModelManager -[#blue]-> "~* filtered/\nsorted" University
+SeplendidModelManager -[#blue]-> "~* filtered/\nsorted" Mapping
 @enduml
