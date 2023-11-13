@@ -38,6 +38,7 @@
     },
     {
       "src": "DeveloperGuide.md",
+      "title": "Developer Guide",
       "headings": {
         "seplendid-developer-guide": "SEPlendid Developer Guide",
         "acknowledgements": "Acknowledgements",
@@ -45,7 +46,7 @@
         "design": "Design",
         "architecture": "Architecture",
         "ui-component": "UI component",
-        "logic-component": "Logic component",
+        "seplendidlogic-component": "SeplendidLogic component",
         "model-component": "Model component",
         "storage-component": "Storage component",
         "common-classes": "Common classes",
