@@ -193,7 +193,12 @@
       "src": "team/tjingsheng.md",
       "title": "Jing Sheng's Project Portfolio Page",
       "headings": {
-        "project-seplendid": "Project: SEPlendid"
+        "project-seplendid": "Project: SEPlendid",
+        "new-features": "New Features:",
+        "code-contributions": "Code Contributions",
+        "enhancements-to-existing-features": "Enhancements to existing features",
+        "bugs-fixed": "Bugs Fixed",
+        "documentations": "Documentations"
       },
       "headingKeywords": {}
     },
