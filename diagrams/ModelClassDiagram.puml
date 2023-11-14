@@ -10,24 +10,19 @@ Class "<<interface>>\nReadOnlyLocalCourseCatalogue" as ReadOnlyLocalCourseCatalo
 Class "<<interface>>\nReadOnlyPartnerCourseCatalogue" as ReadOnlyPartnerCourseCatalogue
 Class "<<interface>>\nReadOnlyUniversityCatalogue" as ReadOnlyUniversityCatalogue
 Class "<<interface>>\nReadOnlyMappingCatalogue" as ReadOnlyMappingCatalogue
-Class "<<interface>>\nReadOnlyNoteCatalogue" as ReadOnlyNoteCatalogue
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nSeplendidModel" as SeplendidModel
 Class LocalCourseCatalogue
 Class PartnerCourseCatalogue
 Class UniversityCatalogue
-Class NoteCatalogue
 Class MappingCatalogue
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> SeplendidModel
 
 Class SeplendidModelManager
-Class UserPrefs
 
 Class UniqueLocalCourseList
 Class UniquePartnerCourseList
-Class UniqueNoteList
 Class UniqueMappingList
 Class UniqueUniversityList
 
@@ -49,31 +44,21 @@ Class UniversityName
 Class Mapping
 Class MappingMiscInformation
 
-Class Note
-Class Content
-Class Tag
-
 LocalCourseCatalogue .up.|> ReadOnlyLocalCourseCatalogue
 PartnerCourseCatalogue .up.|> ReadOnlyPartnerCourseCatalogue
 UniversityCatalogue .up.|> ReadOnlyUniversityCatalogue
-NoteCatalogue .up.|> ReadOnlyNoteCatalogue
 MappingCatalogue .up.|> ReadOnlyMappingCatalogue
-UserPrefs .up.|> ReadOnlyUserPrefs
 
 SeplendidModelManager .up.|> SeplendidModel
 SeplendidModel .left.> ReadOnlyLocalCourseCatalogue
 SeplendidModel .left.> ReadOnlyPartnerCourseCatalogue
 SeplendidModel .left.> ReadOnlyMappingCatalogue
-SeplendidModel .right.> ReadOnlyUserPrefs
 SeplendidModel .right.> ReadOnlyUniversityCatalogue
-SeplendidModel .right.> ReadOnlyNoteCatalogue
 
 SeplendidModelManager -left-> "1" LocalCourseCatalogue
 SeplendidModelManager -left-> "1" PartnerCourseCatalogue
 SeplendidModelManager -left-> "1" UniversityCatalogue
 SeplendidModelManager -right-> "1" MappingCatalogue
-SeplendidModelManager -right-> "1" NoteCatalogue
-SeplendidModelManager -right-> "1" UserPrefs
 
 LocalCourseCatalogue *--> "1" UniqueLocalCourseList
 UniqueLocalCourseList --> "~* all" LocalCourse
@@ -83,28 +68,23 @@ UniversityCatalogue *--> "1" UniqueUniversityList
 UniqueUniversityList --> "~* all" University
 MappingCatalogue *--> "1" UniqueMappingList
 UniqueMappingList --> "~* all" Mapping
-NoteCatalogue *--> "1" UniqueNoteList
-UniqueNoteList --> "~* all" Note
 
-LocalCourse *--> LocalCode
-LocalCourse *--> LocalName
-LocalCourse *--> LocalUnit
-LocalCourse *--> LocalDescription
+LocalCourse *--> "1" LocalCode
+LocalCourse *--> "1" LocalName
+LocalCourse *--> "1" LocalUnit
+LocalCourse *--> "1" LocalDescription
 
-PartnerCourse *--> PartnerCode
-PartnerCourse *--> PartnerName
-PartnerCourse *--> PartnerUnit
-PartnerCourse *--> PartnerDescription
+PartnerCourse *--> "1" PartnerCode
+PartnerCourse *--> "1" PartnerName
+PartnerCourse *--> "1" PartnerUnit
+PartnerCourse *--> "1" PartnerDescription
 
-University *--> UniversityName
+University *--> "1" UniversityName
 
-Mapping *--> MappingMiscInformation
-Mapping ---> LocalCode
-Mapping ---> PartnerCode
-Mapping ---> UniversityName
-
-Note *--> Content
-Note *--> "*" Tag
+Mapping *--> "1" MappingMiscInformation
+Mapping ---> "1" LocalCode
+Mapping ---> "1" PartnerCode
+Mapping ---> "1" UniversityName
 
 SeplendidModelManager -[#blue]-> "~* filtered/\nsorted" LocalCourse
 SeplendidModelManager -[#blue]-> "~* filtered/\nsorted" PartnerCourse

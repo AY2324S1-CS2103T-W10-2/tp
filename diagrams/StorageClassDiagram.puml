@@ -6,11 +6,6 @@ skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage as StoragePackage {
 
-package "UserPrefs Storage" #F4F6F6{
-Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
-Class JsonUserPrefsStorage
-}
-
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
@@ -19,7 +14,6 @@ Class "<<interface>>\nLocalCourseCatalogueStorage" as LocalCourseCatalogueStorag
 Class "<<interface>>\nPartnerCourseCatalogueStorage" as PartnerCourseCatalogueStorage
 Class "<<interface>>\nUniversityCatalogueStorage" as UniversityCatalogueStorage
 Class "<<interface>>\nMappingCatalogueStorage" as MappingCatalogueStorage
-Class "<<interface>>\nNoteCatalogueStorage" as NoteCatalogueStorage
 
 Class JsonLocalCourseCatalogueStorage
 Class JsonSerializableLocalCourseCatalogue
@@ -29,33 +23,22 @@ Class JsonUniversityCatalogueStorage
 Class JsonSerializableUniversityCatalogue
 Class JsonMappingCatalogueStorage
 Class JsonSerializableMappingCatalogue
-Class JsonNoteCatalogueStorage
-Class JsonSerializableNoteCatalogue
 
-Class JsonAdaptedTag
 Class JsonAdaptedLocalCourse
 Class JsonAdaptedPartnerCourse
 Class JsonAdaptedMapping
 Class JsonAdaptedUniversity
-Class JsonAdaptedNote
 
 StorageManager .up.|> Storage
-StorageManager -down-> "1" UserPrefsStorage
 StorageManager -up-> "1" LocalCourseCatalogueStorage
 StorageManager -up-> "1" PartnerCourseCatalogueStorage
 StorageManager -down-> "1" MappingCatalogueStorage
 StorageManager -up-> "1" UniversityCatalogueStorage
-StorageManager -up-> "1" NoteCatalogueStorage
 
 Storage -left-|> LocalCourseCatalogueStorage
 Storage -left-|> PartnerCourseCatalogueStorage
 Storage -left-|> UniversityCatalogueStorage
 Storage -down-|> MappingCatalogueStorage
-Storage -right-|> NoteCatalogueStorage
-Storage -right-|> UserPrefsStorage
-
-
-JsonUserPrefsStorage .up.|> UserPrefsStorage
 
 JsonLocalCourseCatalogueStorage .up.|> LocalCourseCatalogueStorage
 JsonLocalCourseCatalogueStorage ..> JsonSerializableLocalCourseCatalogue
@@ -73,8 +56,4 @@ JsonMappingCatalogueStorage .up.|> MappingCatalogueStorage
 JsonMappingCatalogueStorage ..> JsonSerializableMappingCatalogue
 JsonSerializableMappingCatalogue --> "*" JsonAdaptedMapping
 
-JsonNoteCatalogueStorage .up.|> NoteCatalogueStorage
-JsonNoteCatalogueStorage ..> JsonSerializableNoteCatalogue
-JsonSerializableNoteCatalogue --> "*" JsonAdaptedNote
-JsonAdaptedNote --> "*" JsonAdaptedTag
 @enduml
