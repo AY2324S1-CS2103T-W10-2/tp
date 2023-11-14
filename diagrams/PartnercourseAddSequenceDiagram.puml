@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box SeplendidLogic LOGIC_COLOR_T1
+participant ":SeplendidLogicManager" as SeplendidLogicManager LOGIC_COLOR
+participant ":SeplendidParser" as SeplendidParser LOGIC_COLOR
+participant ":PartnerCourseAddCommandParser" as PartnerCourseAddCommandParser LOGIC_COLOR
+participant "d:PartnerCourseAddCommand" as PartnerAddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box SeplendidModel MODEL_COLOR_T1
+participant ":SeplendidModel" as SeplendidModel MODEL_COLOR
+end box
+
+[-> SeplendidLogicManager : execute("partnercourse add [University of Toronto] [ROB311] [Artificial Intelligence] [5.0] [Introduction module to AI]")
+activate SeplendidLogicManager
+
+SeplendidLogicManager -> SeplendidParser : parseCommand("partnercourse add [University of Toronto] [ROB311] [Artificial Intelligence] [5.0] [Introduction module to AI]")
+activate SeplendidParser
+
+create PartnerCourseAddCommandParser
+SeplendidParser -> PartnerCourseAddCommandParser
+activate PartnerCourseAddCommandParser
+
+PartnerCourseAddCommandParser --> SeplendidParser
+deactivate PartnerCourseAddCommandParser
+
+SeplendidParser -> PartnerCourseAddCommandParser : parse("note add ["You can do it!"] ["Motivation"]")
+activate PartnerCourseAddCommandParser
+
+create PartnerCourseAddCommand
+PartnerCourseAddCommandParser -> PartnerCourseAddCommand
+activate PartnerCourseAddCommand
+
+PartnerCourseAddCommand --> PartnerCourseAddCommandParser : d
+deactivate PartnerCourseAddCommand
+
+PartnerCourseAddCommandParser --> SeplendidParser : d
+deactivate PartnerCourseAddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PartnerCourseAddCommandParser -[hidden]-> SeplendidParser
+destroy PartnerCourseAddCommandParser
+
+SeplendidParser --> SeplendidLogicManager : d
+deactivate SeplendidParser
+
+SeplendidLogicManager -> PartnerCourseAddCommand : execute()
+activate PartnerCourseAddCommand
+
+PartnerCourseAddCommand -> SeplendidModel : addNote("partnercourse add [University of Toronto] [ROB311] [Artificial Intelligence] [5.0] [Introduction module to AI]")
+activate SeplendidModel
+
+SeplendidModel --> PartnerCourseAddCommand
+deactivate SeplendidModel
+
+create CommandResult
+PartnerCourseAddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PartnerCourseAddCommand
+deactivate CommandResult
+
+PartnerCourseAddCommand --> SeplendidLogicManager : result
+deactivate PartnerCourseAddCommand
+
+[<--SeplendidLogicManager
+deactivate SeplendidLogicManager
+@enduml
+

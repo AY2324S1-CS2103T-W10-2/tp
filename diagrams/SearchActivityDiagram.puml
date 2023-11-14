@@ -1,0 +1,24 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters search command;
+
+if () then ([specified data object does not exist in SEPlendid])
+    -Error: The specified data object does not exist in SEPlendid
+    stop
+else ([else])
+    if () then ([specified attribute is invalid])
+        -Error: Attribute is invalid
+        stop
+    else ([else])
+        if () then ([search keyword is invalid])
+            -Error: Search keyword is invalid
+                stop
+        else ([else])
+
+        -search command successfully executes.\n Specified data object is queried.
+stop
+@enduml
+

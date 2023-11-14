@@ -1,0 +1,81 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box SeplendidLogic LOGIC_COLOR_T1
+participant ":SeplendidLogicManager" as SeplendidLogicManager LOGIC_COLOR
+participant ":SeplendidParser" as SeplendidParser LOGIC_COLOR
+participant ":PartnerCourseSearchCommandParser" as PartnerCourseUpdateCommandParser LOGIC_COLOR
+participant "d:PartnerCourseUpdateCommand" as PartnerCourseUpdateCommand LOGIC_COLOR
+participant ":PartnerCourse" as PartnerCourse LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box SeplendidModel MODEL_COLOR_T1
+participant ":SeplendidModel" as SeplendidModel MODEL_COLOR
+end box
+
+[-> SeplendidLogicManager : execute("partnercourse search [partnercode] [CS2105]")
+activate SeplendidLogicManager
+
+SeplendidLogicManager -> SeplendidParser : parseCommand("partnercourse search [partnercode] [CS2105]")
+activate SeplendidParser
+
+create PartnerCourseSearchCommandParser
+SeplendidParser -> PartnerCourseSearchCommandParser
+activate PartnerCourseSearchCommandParser
+
+PartnerCourseSearchCommandParser --> SeplendidParser
+deactivate PartnerCourseSearchCommandParser
+
+SeplendidParser -> PartnerCourseSearchCommandParser : parse("[CS2103] [unit] [5.0]")
+activate PartnerCourseSearchCommandParser
+
+create PartnerCourseSearchCommand
+PartnerCourseSearchCommandParser -> PartnerCourseSearchCommand
+activate PartnerCourseSearchCommand
+
+PartnerCourseSearchCommand --> PartnerCourseSearchCommandParser : d
+deactivate PartnerCourseSearchCommand
+
+PartnerCourseSearchCommandParser --> SeplendidParser : d
+deactivate PartnerCourseSearchCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PartnerCourseSearchCommandParser -[hidden]-> SeplendidParser
+destroy PartnerCourseSearchCommandParser
+
+SeplendidParser --> SeplendidLogicManager : d
+deactivate SeplendidParser
+
+SeplendidLogicManager -> PartnerCourseSearchCommand : execute()
+activate PartnerCourseSearchCommand
+
+PartnerCourseSearchCommand -> SeplendidModel : getPartnerCourseIfExists(localCode)
+activate SeplendidModel
+
+SeplendidModel --> PartnerCourseSearchCommand : Optional.of(partnerCourse)
+deactivate SeplendidModel
+
+PartnerCourse -> PartnerCourseSearchCommand
+deactivate PartnerCourse
+
+PartnerCourseSearchCommand -> SeplendidModel : searchPartnerCourses(attribute, predicate)
+activate SeplendidModel
+
+SeplendidModel --> PartnerCourseSearchCommand
+deactivate SeplendidModel
+
+create CommandResult
+PartnerCourseSearchCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PartnerCourseSearchCommand
+deactivate CommandResult
+
+PartnerCourseSearchCommand --> SeplendidLogicManager : result
+deactivate PartnerCourseSearchCommand
+
+[<--SeplendidLogicManager
+deactivate SeplendidLogicManager
+@enduml
+

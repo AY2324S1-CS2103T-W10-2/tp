@@ -1,0 +1,26 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User enters add command;
+
+if () then ([specified data object does not exist in SEPlendid])
+    -Error: The specified data object does not exist in SEPlendid
+    stop
+else ([else])
+    if () then ([specified attribute is invalid])
+        -Error: Attribute is invalid
+        stop
+    else ([else])
+        if () then ([added value is invalid])
+            -Error: Added value is invalid
+                stop
+        else ([else])
+            if () then ([added data object exists in SEPlendid])
+                -Error: Duplicate data object
+                stop
+            else ([else])
+                -add command successfully executes.\nData object is added.
+stop
+@enduml

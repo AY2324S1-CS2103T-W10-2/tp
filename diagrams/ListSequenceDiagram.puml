@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box SeplendidLogic LOGIC_COLOR_T1
+participant ":SeplendidLogicManager" as SeplendidLogicManager LOGIC_COLOR
+participant ":SeplendidParser" as SeplendidParser LOGIC_COLOR
+participant ":LocalCourseListCommandParser" as LocalCourseListCommandParser LOGIC_COLOR
+participant "d:LocalCourseListCommand" as LocalCourseListCommand LOGIC_COLOR
+participant ":LocalCourse" as LocalCourse LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box SeplendidModel MODEL_COLOR_T1
+participant ":SeplendidModel" as SeplendidModel MODEL_COLOR
+end box
+
+[-> SeplendidLogicManager : execute("localcourse list")
+activate SeplendidLogicManager
+
+SeplendidLogicManager -> SeplendidParser : parseCommand("localcourse list")
+activate SeplendidParser
+
+create LocalCourseListCommandParser
+SeplendidParser -> LocalCourseListCommandParser
+activate LocalCourseListCommandParser
+
+LocalCourseListCommandParser --> SeplendidParser
+deactivate LocalCourseListCommandParser
+
+SeplendidParser -> LocalCourseListCommandParser : parse("list")
+activate LocalCourseListCommandParser
+
+create LocalCourseListCommand
+LocalCourseListCommandParser -> LocalCourseListCommand
+activate LocalCourseListCommand
+
+LocalCourseListCommand --> LocalCourseListCommandParser : d
+deactivate LocalCourseListCommand
+
+LocalCourseListCommandParser --> SeplendidParser : d
+deactivate LocalCourseListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LocalCourseListCommandParser -[hidden]-> SeplendidParser
+destroy LocalCourseListCommandParser
+
+SeplendidParser --> SeplendidLogicManager : d
+deactivate SeplendidParser
+
+SeplendidLogicManager -> LocalCourseListCommand : execute()
+activate LocalCourseListCommand
+
+SeplendidModel --> LocalCourseUpdateCommand : Optional.of(localCourse)
+deactivate SeplendidModel
+
+create LocalCourse
+LocalCourseUpdateCommand -> LocalCourse
+activate LocalCourse
+
+LocalCourse -> LocalCourseUpdateCommand
+deactivate LocalCourse
+
+LocalCourseUpdateCommand -> SeplendidModel : updateFilteredLocalCourseList(SeplendidModel.PREDICATE_SHOW_ALL_LOCAL_COURSES)
+activate SeplendidModel
+
+SeplendidModel --> LocalCourseListCommand
+deactivate SeplendidModel
+
+create CommandResult
+LocalCourseListCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LocalCourseListCommand
+deactivate CommandResult
+
+LocalCourseListCommand --> SeplendidLogicManager : result
+deactivate LocalCourseListCommand
+
+[<--SeplendidLogicManager
+deactivate SeplendidLogicManager
+@enduml
+

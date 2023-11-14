@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+!pragma useVerticalIf on
+start
+:User enters 'list' command;
+if (Command is 'list') then (Yes)
+  :Retrieve list of all courses from sample data;
+  :Display the list of courses;
+else (No)
+  :Error: Invalid command;
+  stop
+endif
+:End 'list' command execution;
+stop
+@enduml
+
