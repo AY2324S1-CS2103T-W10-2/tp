@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # SEPlendid Developer Guide
@@ -117,8 +117,7 @@ How the parsing works:
 
 ### Model component
 
-**API
-** : [`SeplendidModel.java`](https://github.com/AY2324S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/model/SeplendidModel.java)
+**API** : [`SeplendidModel.java`](https://github.com/AY2324S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/model/SeplendidModel.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="100%" />
 
@@ -128,21 +127,21 @@ The `SeplendidModel` component,
 * stores the local course, partner course, university, mapping and note data. `SeplendidModelManager` also serves as
   the facade class, for other components to access the data. It stores all the data, which the UI can access to
   display. Commands also take in the `SeplendidModel` object to perform their operations on the data.
-* Local course are represented by `LocalCourse` objects, which are stored in a `UniqueLocalCourseList` object. Each
-  `LocalCourse` has `LocalCode`, `LocalName`, `LocalDescription` and `LocalUnit` objects. `PartnerCourse` follows
-  similarly, and `Mapping` depends on `LocalCode`, `PartnerCode` and `UniversityName` objects (on top of its own
-  `MappingMiscInformation`).
 * stores the currently 'searched for' `LocalCourse`, `PartnerCourse`, `University`, `Mapping` objects as separate
   filtered lists, exposed to outsiders as unmodifiable `ObservableList<LocalCourse>`, `ObservableList<PartnerCourse>`,
   `ObservableList<University>` and `ObservableList<Mapping>` objects respectively (e.g. the UI can be bound to one of
   these lists so that the UI automatically updates when the data in the list changes).
 * does not depend on any of the other three components (as the `SeplendidModel` represents data entities of the domain,
   they should make sense on their own without depending on other components)
+* Local course are represented by `LocalCourse` objects, which are stored in a `UniqueLocalCourseList` object. Each
+  `LocalCourse` has `LocalCode`, `LocalName`, `LocalDescription` and `LocalUnit` objects. `PartnerCourse` follows
+  similarly, and `Mapping` depends on `LocalCode`, `PartnerCode` and `UniversityName` objects (on top of its own
+  `MappingMiscInformation`).
+* Information on `Note` model components are omitted in the above diagram for brevity.
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S1-CS2103T-W10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="100%" />
 
@@ -155,6 +154,7 @@ The `Storage` component,
   , which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `SeplendidModel` component (because the `Storage` component's job is to save/retrieve
   objects that belong to the `SeplendidModel`).
+* `NoteCatalogueStorage` and `UserPrefStorage` are omitted from the above diagram for brevity.
 
 ### Common classes
 
@@ -172,8 +172,11 @@ The below diagram gives a high-level overview on how the `SeplendidParser` parse
 <puml src="diagrams/SeplendidParserActivityDiagram.puml" alt="SeplendidParserActivityDiagram" />
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Delete feature
+
 #### Overview
+
 The `delete` command deletes specified data object in SEPlendid, specified by their unique identity attributes.
 
 Here is an activity diagram for `delete localcourse`:
@@ -193,8 +196,11 @@ Here is a sequence diagram for `delete`:
 The data object is only deleted when all the specified identity attributes are identical to an existing data object.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Update feature
+
 #### Overview
+
 The `update` command updates specified attribute of a data object with updated value.
 
 Here is an activity diagram for `update localcourse`:
@@ -217,8 +223,11 @@ The data object is only updated when all the specified identity attributes are i
 Each data type has different attributes that can be used for updating.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Sort feature
+
 #### Overview
+
 The `sort` command sorts specified data objects by specified attributes.
 
 Here is an activity diagram for `sort localcourse`:
@@ -228,12 +237,15 @@ Here is an sequence diagram for `sort`:
 <puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
 
 #### Feature details
+
 1. The user specifies a data object and its attribute to sort.
-2. If the attribute is not applicable for `sort`, the user will be prompted to enter the attribute correctly via an error message.
+2. If the attribute is not applicable for `sort`, the user will be prompted to enter the attribute correctly via an
+   error message.
 3. If all the above steps complete without any exceptions, then the data objects will be sorted by specified attribute.
 
 #### Feature considerations
-Each data type has different attributes 
+
+Each data type has different attributes
 that can be used for sorting.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -357,6 +369,7 @@ Each data type has different attributes that can be used for searching.
 
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Mapping feature
 
 The mapping `list/add/delete` mechanism is facilitated by `MappingCatalogue`. It stores `Mapping` objects which
@@ -453,8 +466,8 @@ non-empty, the deletion will be performed, otherwise a `CommandException` will b
     * Pros: Don't need to create new enum classes
     * Cons: Hard to keep track of attributes of each data types.
 
-
 --------------------------------------------------------------------------------------------------------------------
+
 ### University Feature
 
 The university `list/search/sort` mechanism is facilitated by `UniversityCatalogue`. It stores `University` objects
@@ -462,10 +475,11 @@ which contain the `UniversityName` object. This means that `University` is depen
 
 A `UniqueUniversityList` is stored internally in `UniversityCatalogue`. Additionally, it implements the following
 operations:
-- `UniversityCatalogue#hasUniversity(University)`  —  Checks whether a university exists in the university
+
+- `UniversityCatalogue#hasUniversity(University)`— Checks whether a university exists in the university
   catalogue, to use to prevent duplicate insertion.
-.
-These operations are exposed in the `SeplendidModel` interface as `SeplendidModel#hasUniversity(University).
+  .
+  These operations are exposed in the `SeplendidModel` interface as `SeplendidModel#hasUniversity(University).
 
 When the user launches the application for the first time. All relevant data catalogues: `UniversityCatalogue` are
 initialised with the initial state, containing the seed data (list of partner universities) for SEP.
@@ -613,87 +627,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: List local course**
 
 **MSS**
+
 1. User requests to list local courses.
 2. SEPlendid shows all available local courses.
-Use case ends.
+   Use case ends.
 
 **Use case: Add a local course**
 
 **MSS:**
+
 1. User requests to add a local course.
 2. SEPlendid adds and shows the local course.
    Use case ends.
 
 **Extension:**
-* 1a. The command format is invalid. 
-  * 1a1. SEPlendid shows an error message. 
-  
+
+* 1a. The command format is invalid.
+    * 1a1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 * 1b. The local course is already added.
-  * 1b1. SEPlendid shows an error message.
-  
+    * 1b1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 
 **Use case: Delete a local course**
 
 **MSS:**
+
 1. User requests to delete a local course.
 2. SEPlendid deletes and shows the local course deleted.
-Use case ends.
+   Use case ends.
 
 **Extension:**
-* 1a. The command format is invalid. 
-  * 1a1. SEPlendid shows an error message.
-  
+
+* 1a. The command format is invalid.
+    * 1a1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 * 1b. The local course does not exist.
-  * 1b1. SEPlendid shows an error message.
-  
+    * 1b1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 
 **Use case: Sorts local course**
 
 **MSS:**
+
 1. User requests to sort the list of local courses.
 2. SEPlendid sorts and shows sorted list of all available local courses.
 
 Use case ends.
 
 **Extension:**
+
 * 1a. The command format is invalid.
-  * 1a1. SEPlendid shows an error message.
+    * 1a1. SEPlendid shows an error message.
 
   Use case resumes at step 1.
 
 #### Partner course
+
 **Use case: List partner course**
 
 **MSS:**
+
 1. User requests to list partner courses.
 2. SEPlendid shows all available partner courses.
-Use case ends.
+   Use case ends.
 
 **Use case: Add a partner course**
 
 **MSS:**
+
 1. User requests to add a partner course.
 2. SEPlendid adds and shows the partner course.
-Use case ends.
+   Use case ends.
 
 **Extension:**
-* 1a. The command format is invalid. 
-  * 1a1. SEPlendid shows an error message.
-  
+
+* 1a. The command format is invalid.
+    * 1a1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
-* 1b. The partner course is already added. 
-  * 1b1. SEPlendid shows an error message.
-    
+* 1b. The partner course is already added.
+    * 1b1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 
 **Use case: Delete a partner course**
 
 **MSS:**
-1. User requests to delete a partner course. 
+
+1. User requests to delete a partner course.
 2. SEPlendid deletes and shows the partner course deleted.
 
 Use case ends.
@@ -701,51 +727,58 @@ Use case ends.
 **Use case: Sorts partner course**
 
 **MSS:**
+
 1. User requests to sort the list of partner courses.
 2. SEPlendid sorts and shows sorted list of all available partner courses.
 
 Use case ends.
 
 **Extension:**
+
 * 1a. The command format is invalid.
-  * 1a1. SEPlendid shows an error message.
+    * 1a1. SEPlendid shows an error message.
 
   Use case resumes at step 1.
-    
+
 **Extension:**
-* 1a. The command format is invalid. 
-  * 1a1. SEPlendid shows an error message.
-  
+
+* 1a. The command format is invalid.
+    * 1a1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
-* 1b. The partner course does not exist. 
-  * 1b1. SEPlendid shows an error message.
-  
+* 1b. The partner course does not exist.
+    * 1b1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 
 **Use case: Sorts partner course**
 
 **MSS:**
+
 1. User requests to sort the list of partner courses.
 2. SEPlendid sorts and shows sorted list of all available partner courses.
 
 Use case ends.
 
 **Extension:**
+
 * 1a. The command format is invalid.
-  * 1a1. SEPlendid shows an error message.
-  
+    * 1a1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 
-
 #### Mapping
+
 **Use case: List mappings**
 
 **MSS:**
+
 1. User requests to list available mappings.
 2. SEPlendid shows all available mappings.
    Use case ends.
 
 **Extension:**
+
 * 1a. Afterwards, the user can choose to bring up a detail panel of a mapping.
     * 1a1. User clicks on a mapping item in the list.
     * 1a2. SEPlendid shows the corresponding detail panel of the clicked-on mapping.
@@ -784,13 +817,13 @@ Use case ends.
 
 **Extension:**
 
-* 1a. The command format is invalid. 
-  * 1a1. SEPlendid shows an error message.
-  
+* 1a. The command format is invalid.
+    * 1a1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 * 1b. The mappings does not exist.
-  * 1b1. SEPlendid shows an error message.
-  
+    * 1b1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 
 **Use case: Sort mappings** \
@@ -844,7 +877,6 @@ Actor: User \
     * 2a2. SEPlendid shows the corresponding detail panel of the clicked-on mapping. \
       Use case ends.
 
-
 #### Universities
 
 **Use case: List universities**
@@ -868,6 +900,7 @@ Use case ends.
 **Use case: Sort universities**
 
 **MSS:**
+
 1. User requests to sort the list of universities.
 2. SEPlendid shows the universities sorted alphabetically.
 
@@ -886,9 +919,9 @@ Use case ends
 
 **Extension:**
 
-* 1a. The command format is invalid. 
-  * 1a1. SEPlendid shows an error message.
-  
+* 1a. The command format is invalid.
+    * 1a1. SEPlendid shows an error message.
+
   Use case resumes at step 1.
 
 **Use case: List notes**
@@ -913,16 +946,16 @@ Use case ends
 
 **Extension:**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
   Use case ends.
 
-* 3a. The command format is invalid. 
-  * 3a1. SEPlendid shows an error message.
-  
-    Use case resumes at step 2. 
-* 3b. The task does not exist. 
-  * 3b1. SEPlendid shows an error message.
-      
+* 3a. The command format is invalid.
+    * 3a1. SEPlendid shows an error message.
+
+      Use case resumes at step 2.
+* 3b. The task does not exist.
+    * 3b1. SEPlendid shows an error message.
+
   Use case resumes at step 2.
 
 **Use case: Delete a note**
@@ -938,16 +971,17 @@ Use case ends
 
 **Extension:**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
 
 Use case ends.
-* 3a. The command format is invalid. 
-  * 3a1. SEPlendid shows an error message.
-  
-  Use case resumes at step 2. 
-* 3b. The task does not exist. 
-  * 3b1. SEPlendid shows an error message.
-  
+
+* 3a. The command format is invalid.
+    * 3a1. SEPlendid shows an error message.
+
+  Use case resumes at step 2.
+* 3b. The task does not exist.
+    * 3b1. SEPlendid shows an error message.
+
   Use case resumes at step 2.
 
 **Use case: Tag a note**
@@ -963,19 +997,18 @@ Use case ends
 
 **Extension:**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
 
-    Use case ends.
+  Use case ends.
 
-* 3a. The command format is invalid. 
-  * 3a1. SEPlendid shows an error message.
+* 3a. The command format is invalid.
+    * 3a1. SEPlendid shows an error message.
 
   Use case resumes at step 2.
 * 3b. The task does not exist.
-  * 3b1. SEPlendid shows an error message.
-  
-  Use case resumes at step 2.
+    * 3b1. SEPlendid shows an error message.
 
+  Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -1017,14 +1050,15 @@ testers are expected to do more *exploratory* testing.
 
     1. Double-click the jar file Expected: Shows the GUI with a set of sample courses. The window size may not be
        optimum.
-  1. Double-click the jar file <br>
-     Expected: Shows the GUI with a set of sample local course. The window size may not be optimum.
+1. Double-click the jar file <br>
+   Expected: Shows the GUI with a set of sample local course. The window size may not be optimum.
 
 ### Local Course
 
 #### List all local courses
 
-Prerequisite: 
+Prerequisite:
+
 - There is at least 1 local course stored in SEPlendid.
 
 `localcourse list`
@@ -1053,7 +1087,8 @@ Expected Output in the Command Output Box: Error for invalid command format.
 
 #### Delete a local course
 
-Prerequisite: 
+Prerequisite:
+
 - A local course with local code of `CS1111` currently exists in the local course list.
 - The local course specified should not be present in any of the current mappings.
 
@@ -1065,7 +1100,8 @@ Expected Output in the Command Output Box: Local course deleted message.
 
 #### Update a local course
 
-Prerequisites: 
+Prerequisites:
+
 - A local course with local code of `BT1101` currently exists in the local course list.
 
 `localcourse update [BT1101] [unit] [3]`
@@ -1077,6 +1113,7 @@ Expected Output in the Command Output Box: Local course updated message.
 #### Search a local course by attributes
 
 Prerequisite:
+
 - There is at least 1 local course that have a localcode that contains the word `cs` stored in SEPlendid.
 
 `localcourse search [localcode] [cs]`
@@ -1086,6 +1123,7 @@ Expected Output: A list of local courses that have a localcode of `cs`.
 Expected Output in the Command Output Box: Local course searched message.
 
 Prerequisite:
+
 - There is no local course that have a localcode that contains the letter `z` stored in SEPlendid.
 
 `localcourse search [localcode] [z]`
@@ -1103,13 +1141,15 @@ Expected Output in the Command Output Box: Local course searched message.
 #### Sort local courses by attributes
 
 Prerequisite:
+
 - There is at least 1 local course stored in SEPlendid.
 
 `localcourse sort [localname]`
 
-Expected Output: All local courses stored in SEPlendid will be shown in the Item List Box sorted according to the localname in ascending order.
+Expected Output: All local courses stored in SEPlendid will be shown in the Item List Box sorted according to the
+localname in ascending order.
 
-Expected Output in the Command Output Box: Sorted all local courses 
+Expected Output in the Command Output Box: Sorted all local courses
 
 <box type="info" seamless>
 
@@ -1121,7 +1161,8 @@ Expected Output in the Command Output Box: Sorted all local courses
 
 #### List all partner courses
 
-Prerequisite: 
+Prerequisite:
+
 - There is at least 1 partner course stored in SEPlendid.
 
 `partnercourse list`
@@ -1138,7 +1179,8 @@ Expected Output in the Command Output Box: Listed all partner courses
 
 #### Add a partner course
 
-Prerequisite: 
+Prerequisite:
+
 - The university of the partner course should be added to the university list.
 
 `partnercourse add [The Hong Kong Polytechnic University] [CS1111] [Test module] [4] [test]`
@@ -1153,8 +1195,10 @@ Expected Output in the Command Output Box: Error for invalid command format.
 
 #### Delete a partner course
 
-Prerequisite: 
-- A partner course with partner code of `CS1111` and university of `The Hong Kong Polytechnic University` currently exists in the partner course list.
+Prerequisite:
+
+- A partner course with partner code of `CS1111` and university of `The Hong Kong Polytechnic University` currently
+  exists in the partner course list.
 - The partner course specified should not be present in any of the current mappings.
 
 `partnercourse delete [The Hong Kong Polytechnic University] [CS1111]`
@@ -1166,7 +1210,9 @@ Expected Output in the Command Output Box: Partner course deleted message.
 #### Update a partner course
 
 Prerequisites:
-- A partner course with partner code of `CSE469` and university of `Arizona State University` currently exists in the partner course list.
+
+- A partner course with partner code of `CSE469` and university of `Arizona State University` currently exists in the
+  partner course list.
 
 `partnercourse update [Arizona State University] [CSE469] [unit] [1]`
 
@@ -1177,6 +1223,7 @@ Expected Output in the Command Output Box: Partner course updated message.
 #### Search a partner course by attributes
 
 Prerequisite:
+
 - There is at least 1 partner course that have a partnercode that contains the word `cs` stored in SEPlendid.
 
 `partnercourse search [partnercode] [cs]`
@@ -1186,6 +1233,7 @@ Expected Output: A list of partner courses that have a partnercode of `cs`.
 Expected Output in the Command Output Box: Partner course searched message.
 
 Prerequisite:
+
 - There is no partner course that have a partnercode that contains the letter `zz` stored in SEPlendid.
 
 `partnercourse search [partnercode] [zz]`
@@ -1195,22 +1243,28 @@ Expected Output: No result.
 Expected Output in the Command Output Box: Partner course searched message.
 
     1. Prerequisites: List all mappings using the `mapping list` command. Multiple mappings in the list.
+
 <box type="info" seamless>
 
     1. Ensure your scroll to the bottom.
+
 **Note:** The query cannot start with a number. It must start with an alphabet.
 
     1. Test case: `mapping add [IS4231] [Lund University] [INFC40] [Sem 1 only.]`<br>
        Expected: A new mapping is added, and will appear at the bottom of the list.
+
 </box> 
 
     1. Test case: `mapping delete [IS4231] [Lund University] [INFC40] [Sem 1 only.]`<br>
        Expected: The mapping is deleted, and disappears from the list.
+
 #### Sort partner courses by attributes
 
     1. Other incorrect delete commands to try: `mapping ad`, `mapping add []`, `...` <br>
        Expected: An error message will appear.
+
 Prerequisite:
+
 - There is at least 1 partner course stored in SEPlendid.
 
 `partnercourse sort [university]`
@@ -1222,14 +1276,15 @@ Prerequisite:
 - Therefore, it is recommended to make a copy and keep a backup of existing data before making any changes to any of
   the files under `data/*.json`.
 - One corrupted file will lead to a full reset of the application.
-Expected Output: All partner courses stored in SEPlendid will be shown in the Item List Box sorted according to the university in ascending order.
+  Expected Output: All partner courses stored in SEPlendid will be shown in the Item List Box sorted according to the
+  university in ascending order.
 
 2. To simulate a missing/corrupted data file, delete the `data/` directory.
 
 - A new director will be created in its place, with the default seed data.
 - To corrupt the data, open any of the `.json` files under `data/` and edit the data in it. For instance, you may
   change a `localCode` to the empty string `""`. Restart the application, and observe that the data has been reset.
-Expected Output in the Command Output Box: Sorted all partner courses
+  Expected Output in the Command Output Box: Sorted all partner courses
 
 <box type="info" seamless>
 
@@ -1259,6 +1314,7 @@ Expected Output in the Command Output Box: Listed all universities
 #### Search a university by attributes
 
 Prerequisite:
+
 - There is at least 1 university that have a name that contains the word `hong kong` stored in SEPlendid.
 
 `university search [hong kong]`
@@ -1268,6 +1324,7 @@ Expected Output: A list of universities that have a name that contains `hong kon
 Expected Output in the Command Output Box: University searched message.
 
 Prerequisite:
+
 - There is no university that have a name that contains the word `hk` stored in SEPlendid.
 
 `university search [hk]`
@@ -1332,7 +1389,9 @@ Expected Output in the Command Output Box: Error for invalid command format.
 #### Delete a mapping
 
 Prerequisite:
-- A mapping with local code of `CS3244`, partner code of `CSE494` and university of `Arizona State University` currently exists in the mapping list.
+
+- A mapping with local code of `CS3244`, partner code of `CSE494` and university of `Arizona State University` currently
+  exists in the mapping list.
 
 `mapping delete [CS3244] [Arizona State University] [CSE494]`
 
@@ -1343,6 +1402,7 @@ Expected Output in the Command Output Box: Mapping deleted message.
 #### Search a mapping by attributes
 
 Prerequisite:
+
 - There is at least 1 mapping that have a localcode that contains the word `cs3230` stored in SEPlendid.
 
 `mapping search [localcode] [cs3230]`
@@ -1352,6 +1412,7 @@ Expected Output: A list of mappings that have a localcode that contains the word
 Expected Output in the Command Output Box: Mapping searched message.
 
 Prerequisite:
+
 - There is no mapping that have a localcode that contains the word `z` stored in SEPlendid.
 
 `mapping search [localcode] [z]`
@@ -1363,11 +1424,13 @@ Expected Output in the Command Output Box: Mapping searched message.
 #### Sort mappings by attributes
 
 Prerequisite:
+
 - There is at least 1 mapping stored in SEPlendid.
 
 `mapping sort [localcode]`
 
-Expected Output: All mappings stored in SEPlendid will be shown in the Item List Box sorted according to the localcode in ascending order.
+Expected Output: All mappings stored in SEPlendid will be shown in the Item List Box sorted according to the localcode
+in ascending order.
 
 Expected Output in the Command Output Box: Sorted all mappings
 
@@ -1376,7 +1439,6 @@ Expected Output in the Command Output Box: Sorted all mappings
 **Note:** If there is no mapping, the item list box will just be an empty box.
 
 </box> 
-
 
 ### Note
 
@@ -1417,7 +1479,8 @@ Expected Output in the Command Output Box: Error for invalid command format.
 #### Delete a note
 
 Prerequisite:
-- A note with index 1 currently exists in the note list. 
+
+- A note with index 1 currently exists in the note list.
 
 `note delete [1]`
 
@@ -1428,6 +1491,7 @@ Expected Output in the Command Output Box: Note deleted message.
 #### Update a note
 
 Prerequisite:
+
 - A note with index 1 currently exists in the note list.
 
 `note update [1] [The new content]`
@@ -1439,6 +1503,7 @@ Expected Output in the Command Output Box: Note updated message.
 #### Tag a note
 
 Prerequisite:
+
 - A note with index 1 currently exists in the note list.
 
 `note tag [1] [newtag]`
@@ -1456,6 +1521,7 @@ Expected Output in the Command Output Box: Note tagged message.
 #### Clear tag a note
 
 Prerequisite:
+
 - A note with index 1 currently exists in the note list.
 
 `note cleartag [1]`
@@ -1467,6 +1533,7 @@ Expected Output in the Command Output Box: Note cleartag message.
 #### Search a note by tag
 
 Prerequisite:
+
 - There is at least 1 note that have a tag that contains the word `tag` stored in SEPlendid.
 
 `note search [tag]`
@@ -1476,6 +1543,7 @@ Expected Output: A list of notes that have a tag that contains `tag`.
 Expected Output in the Command Output Box: Note searched message.
 
 Prerequisite:
+
 - There is no note that have a tag that contains the word `test` stored in SEPlendid.
 
 `note search [test]`
@@ -1505,6 +1573,14 @@ Expected Output in the Command Output Box: Note searched message.
 - A new director will be created in its place, with the default seed data.
 - To corrupt the data, open any of the `.json` files under `data/` and edit the data in it. For instance, you may
   change a `localCode` to the empty string `""`. Restart the application, and observe that the data has been reset.
+
+## **Appendix: Planned enhancements**
+
+This section describes the planned enhancements for SEPlendid.
+
+- [ ] Add the ability to allow update of mappings, to complement the existing mapping feature. This was not prioritised
+  due to time constraints.
+- [ ] Add memory for resizing of windows. The application should remember the window size from the latest run.
 
 ## Effort
 
